@@ -27,8 +27,8 @@ PRD_TOKEN="`oathtool --totp -b 4YIKKGPXJD3G32YP`"
 
 sw_login(){
         expect -c "
-        # 每个判断等待两秒
-        set timeout 2
+        # 每个判断等待1秒
+        set timeout 1
         spawn ssh $USER@$HOST -p $PORT
         # 判断是否需要保存秘钥
         expect {
