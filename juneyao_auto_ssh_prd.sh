@@ -7,23 +7,36 @@ getParam(){
 }
 
 
-USER=zhaoyihao             
-echo "[INFO] USER: "${USER}
+ENV=`getParam ENV`
+echo "[INFO] ENV: "${ENV}
 
-# stg:t-itop.juneyaoair.com prd:jmp.juneyaoair.com
-HOST=`getParam HOST`
-echo "[INFO] HOST: "${HOST}
+USER=zhaoyihao
+echo "[INFO] USER: "${USER}
 
 PASSWORD=Cnnqjban235
 echo "[INFO] PASSWORD: *****"
 
-# stg:20 prd:2222
-PORT=`getParam PORT`
-echo "[INFO] PORT: "${PORT}
+if [ "${ENV}" == "STG" ];then
+  # stg:t-jmp.juneyaoair.com prd:jmp.juneyaoair.com
+  HOST="t-jmp.juneyaoair.com"
+  # stg:2222 prd:2222
+  PORT="2222"
+  TOKEN=`cat /Users/hoey/workspace/auto-work/juneyao-jmp-key/stg.txt`
+elif [ "${ENV}" == "PRD" ];then
+  # stg:t-jmp.juneyaoair.com prd:jmp.juneyaoair.com
+  HOST="jmp.juneyaoair.com"
+  # stg:2222 prd:2222
+  PORT="2222"
+  TOKEN=`cat /Users/hoey/workspace/auto-work/juneyao-jmp-key/prd.txt`
+else
+  # stg:t-jmp.juneyaoair.com prd:jmp.juneyaoair.com
+  HOST="t-jmp.juneyaoair.com"
+  # stg:2222 prd:2222
+  PORT="2222"
+  TOKEN=`cat /Users/hoey/workspace/auto-work/juneyao-jmp-key/stg.txt`
+fi
 
-#STG_TOKEN="537949"
-
-PRD_TOKEN="`oathtool --totp -b 4YIKKGPXJD3G32YP`"
+DYNA_TOKEN="`oathtool --totp -b ${TOKEN}`"
 
 sw_login(){
         expect -c "
@@ -40,7 +53,7 @@ sw_login(){
         }
         # 判断发送验证码
         expect {        
-        				\"*OTP Code*\" { send $PRD_TOKEN\n }
+        				\"*OTP Code*\" { send $DYNA_TOKEN\n }
         }
         # 停留在当前登录界面
         interact
