@@ -21,19 +21,19 @@ if [ "${ENV}" == "STG" ];then
   HOST="t-jmp.juneyaoair.com"
   # stg:2222 prd:2222
   PORT="2222"
-  TOKEN=`cat /Users/hoey/workspace/auto-work/juneyao-jmp-key/stg.txt`
+  TOKEN=`cat $HOME/workspace/auto-work/juneyao-jmp-key/stg.txt`
 elif [ "${ENV}" == "PRD" ];then
   # stg:t-jmp.juneyaoair.com prd:jmp.juneyaoair.com
   HOST="jmp.juneyaoair.com"
   # stg:2222 prd:2222
   PORT="2222"
-  TOKEN=`cat /Users/hoey/workspace/auto-work/juneyao-jmp-key/prd.txt`
+  TOKEN=`cat $HOME/workspace/auto-work/juneyao-jmp-key/prd.txt`
 else
   # stg:t-jmp.juneyaoair.com prd:jmp.juneyaoair.com
   HOST="t-jmp.juneyaoair.com"
   # stg:2222 prd:2222
   PORT="2222"
-  TOKEN=`cat /Users/hoey/workspace/auto-work/juneyao-jmp-key/stg.txt`
+  TOKEN=`cat $HOME/workspace/auto-work/juneyao-jmp-key/stg.txt`
 fi
 
 DYNA_TOKEN="`oathtool --totp -b ${TOKEN}`"
